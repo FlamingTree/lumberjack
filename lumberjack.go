@@ -247,15 +247,13 @@ func (l *Logger) openNew() error {
 func backupName(name string, local bool) string {
 	dir := filepath.Dir(name)
 	filename := filepath.Base(name)
-	ext := filepath.Ext(filename)
-	prefix := filename[:len(filename)-len(ext)]
 	t := currentTime()
 	if !local {
 		t = t.UTC()
 	}
 
 	timestamp := t.Format(backupTimeFormat)
-	return filepath.Join(dir, fmt.Sprintf("%s-%s%s", prefix, timestamp, ext))
+	return filepath.Join(dir, fmt.Sprintf("%s.%s", filename, timestamp))
 }
 
 // openExistingOrNew opens the logfile if it exists and if the current write
