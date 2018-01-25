@@ -461,8 +461,8 @@ func (l *Logger) prefixAndExt() (prefix, ext string) {
 	return prefix, ext
 }
 
-func (l *Logger) Sync() {
-	l.file.Sync()
+func (l *Logger) Sync() error {
+	return l.file.Sync()
 }
 
 // compressLogFile compresses the given log file, removing the
